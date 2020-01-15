@@ -1,7 +1,5 @@
-createLogInForm()
-
 function createLogInForm(){
-  topOfPage = document.querySelector("#topOfPage")
+  topRightOfPage = document.querySelector("#topRightOfPage")
   const loginForm = document.createElement("form")
   
   loginForm.id = "loginForm"
@@ -36,7 +34,7 @@ function createLogInForm(){
       localStorage.setItem('token', response.token)
       localStorage.setItem('username', response.username)
       if (response.token){
-        createSignOutButton(loginForm, topOfPage)
+        createSignOutButton(loginForm, topRightOfPage)
       }
       else {
         alert('Incorrect Username or Password.')
@@ -47,25 +45,25 @@ function createLogInForm(){
   
   loginForm.append(loginLabel, loginUsername, loginPassword, loginSubmit)
   
-  topOfPage.append(loginForm)
+  topRightOfPage.append(loginForm)
   
-  renderCreateNewUserButton(topOfPage)
+  renderCreateNewUserButton(topRightOfPage)
  
 }
 
-function renderCreateNewUserButton(topOfPage){
+function renderCreateNewUserButton(topRightOfPage){
   createNewUserButton = document.createElement("button")
 
   createNewUserButton.id = "createNewUserButton"
   createNewUserButton.innerText = "Create New User"
   createNewUserButton.addEventListener('click', () => {
-    createNewUserForm(topOfPage)
+    createNewUserForm(topRightOfPage)
   })
 
-  topOfPage.appendChild(createNewUserButton)
+  topRightOfPage.appendChild(createNewUserButton)
 }
 
-function createNewUserForm(topOfPage){
+function createNewUserForm(topRightOfPage){
   loginForm = document.querySelector("#loginForm")
   loginForm.style.display = "none"
 
@@ -130,7 +128,7 @@ function createNewUserForm(topOfPage){
   createNewUserButton.style.display = "flex"
   })
 
-    topOfPage.append(newUserForm, cancelCreateNewUserButton)
+    topRightOfPage.append(newUserForm, cancelCreateNewUserButton)
   }
   
 function verifyPassword(){
@@ -157,7 +155,7 @@ function verifyPassword(){
   }
 }
 
-function createSignOutButton(loginForm, topOfPage){
+function createSignOutButton(loginForm, topRightOfPage){
   createNewUserButton = document.querySelector('#createNewUserButton')
 
   loginForm.style.display = 'none'
@@ -181,7 +179,6 @@ function createSignOutButton(loginForm, topOfPage){
 
   welcomeMessage.innerText = `Welcome, ${localStorage.getItem("username")}! `
 
-  topOfPage.append(welcomeMessage, signOutButton)
+  topRightOfPage.append(welcomeMessage, signOutButton)
 }
-  
   
