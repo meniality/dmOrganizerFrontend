@@ -49,6 +49,9 @@ function createLogInForm(){
   
   renderCreateNewUserButton(topRightOfPage)
  
+  if (localStorage.getItem("token")){
+    createSignOutButton(loginForm, topRightOfPage)
+  }
 }
 
 function renderCreateNewUserButton(topRightOfPage){
@@ -74,29 +77,23 @@ function createNewUserForm(topRightOfPage){
   newUserForm.id = "newUserForm"
   
   const newUserLabel = document.createElement('label')
-  const usernameLabel = document.createElement('label')
   const username = document.createElement('input')
-  const passwordLabel = document.createElement('label')
   const password = document.createElement('input')
-  const verifyPasswordLabel = document.createElement('label')
   const verifyPasswordInput = document.createElement('input')
   const submitButton = document.createElement('input')
   
   newUserLabel.innerText = "Create a New User:"
 
-  usernameLabel.innerText = "Enter your Username:"
   username.placeholder = "Username"
   
   username.name = "username"
   
-  passwordLabel.innerText = "Enter a Password:"
   password.type = 'password'
   password.placeholder = 'Password'
   password.name = "password"
   
-  verifyPasswordLabel.innerText = "Verify your Password:"
   verifyPasswordInput.type = "password"
-  verifyPasswordInput.placeholder = "Password"
+  verifyPasswordInput.placeholder = "Verify Password"
   verifyPasswordInput.name = "verifyPasswordInput"
   
   submitButton.type = "button"
@@ -107,11 +104,8 @@ function createNewUserForm(topRightOfPage){
   
   newUserForm.append(
     newUserLabel,
-    usernameLabel, 
     username,
-    passwordLabel,
     password,
-    verifyPasswordLabel,
     verifyPasswordInput,
     submitButton,
     )

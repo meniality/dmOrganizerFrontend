@@ -26,6 +26,15 @@
   width: 60rem;
   height: 40rem;
   border-radius: 0.5rem;
+  overflow-x: hidden; 
+  overflow-x: auto; 
+}
+
+#modalCampaignCards{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 50px 100px;
+  margin-top: 2rem;
 }
 
 .new-campaign-modal-content {
@@ -57,4 +66,21 @@
   visibility: visible;
   transform: scale(1.0);
   transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+#campaignCard{
+  width: 15rem;
+  background-color:rgb(238, 238, 238);
+  border-radius: 8px;
+}
+
+#campaignImage{
+  width: inherit;
+}
+
+#campaignTitle{
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 30px;
+  margin-bottom: -6px;
 }
