@@ -68,7 +68,7 @@
   transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
 
-#campaignCard{
+.campaignCard{
   width: 15rem;
   background-color:rgb(238, 238, 238);
   border-radius: 8px;
@@ -93,7 +93,7 @@
   justify-content: center;
 }
 
-#cardContainer{
+.cardContainer{
   width: 220px;
   height: 340px;
   background-image: url("../images/blankCardBackground.jpg");
@@ -120,4 +120,18 @@
   padding-top: 5px;
   width: 195px;
   height: 90px;
+}
+
+#card-modal-content{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 1rem 1.5rem;
+  width: 40rem;
+  height: 40rem;
+  border-radius: 0.5rem;
+  overflow-x: hidden; 
+  overflow-x: auto; 
 }
