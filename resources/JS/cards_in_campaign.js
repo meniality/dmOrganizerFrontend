@@ -11,7 +11,6 @@ function testForCampaignCardModal(campaignId, modal){
 
 function testForNewCardModal(campaignId){
   newCardModal = document.querySelector("#createNewCardModal")
-  console.log(newCardModal)
   if (newCardModal) {
     newCardModalValue = newCardModal.querySelector("#campaign_id")
 
@@ -252,7 +251,6 @@ function createCardInCampaign(card){
 }
 
 function deleteCampaign(campaignId, showCampaignCardsModal){
-  console.log(campaignId)
   fetch(`http://localhost:3000/campaigns/${campaignId}`,{
     method: 'DELETE',
     headers: {
@@ -266,7 +264,6 @@ function deleteCampaign(campaignId, showCampaignCardsModal){
     showCampaignCardsModal.classList.toggle("show-modal")
 
     allCampaigns = document.querySelector('#campaignsModal')
-    console.log(allCampaigns)
     allCampaigns.classList.toggle("show-modal")
   })
 }

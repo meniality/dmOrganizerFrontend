@@ -46,7 +46,6 @@ function renderCampaignsModal(){
 
   createCampaignCards(modal_campaign_cards, modal)
 
-  // modal_content.appendChild(modal_campaign_cards)
   modal.append(modal_content)
   document.body.append(modal)
 

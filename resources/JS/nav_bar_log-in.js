@@ -158,6 +158,9 @@ function createSignOutButton(loginForm, topRightOfPage){
   const signOutButton = document.createElement('button')
   const welcomeMessage = document.createElement('p')
 
+  welcomeMessage.id="welcomeMessage"
+  signOutButton.id="signoutButton"
+
   signOutButton.innerText = ' Sign Out'
   signOutButton.addEventListener('click', () =>{
     createNewUserButton = document.querySelector('#createNewUserButton')
