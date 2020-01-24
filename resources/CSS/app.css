@@ -8,6 +8,17 @@ input{
 margin-bottom: 3px;
 }
 
+button{
+  transition-duration: 0.4s;
+  border-radius: 6px;
+}
+
+button:hover{
+  box-shadow: 10px;
+  background-color:rgb(97, 159, 209);
+  box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
 h1{
   display: flex; 
   justify-content: center;
@@ -73,9 +84,22 @@ h1{
   border-radius: 0.25rem;
   background-color: lightgray;
 }
+
 .close-button:hover {
   background-color: darkgray;
 }
+
+#newCardButton{
+  height: 30px;
+  border-radius: 6px;
+  transition-duration: 0.4s
+}
+#newCardButton:hover{
+  box-shadow: 10px;
+  background-color:rgb(97, 159, 209);
+  box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)
+}
+
 .show-modal {
   opacity: 1;
   visibility: visible;
@@ -103,6 +127,19 @@ h1{
   justify-content: center;
   font-size: 30px;
   margin: 20px;
+}
+
+#deleteCampaignButton{
+  margin-top: 15px;
+  height: 30px;
+  border-radius: 6px;
+  transition-duration: 0.4s
+}
+
+#deleteCampaignButton:hover{
+  box-shadow: 10px;
+  background-color:rgb(97, 159, 209);
+  box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)
 }
 
 #modalCardContainer{
@@ -292,6 +329,13 @@ left: 10px;
   font-size: 1rem;
   left: 10px;
   margin-top: 2rem;
+  transition-duration: 0.4s
+}
+
+#updateSubmitButton:hover{
+  box-shadow: 10px;
+  background-color:rgb(97, 159, 209);
+  box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)
 }
 
 #removeButton{

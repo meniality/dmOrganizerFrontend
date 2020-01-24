@@ -45,12 +45,14 @@ function showCardsInCampaign(campaignId, modal){
   })
 
   newCardButton.innerText = "Create a new card."
+  newCardButton.id = "newCardButton"
   newCardButton.addEventListener('click', () =>{
     showCampaignCardsModal.classList.toggle("show-modal")
 
     testForNewCardModal(campaignId)
   })
   deleteCampaignButton.innerText = "Delete Campaign"
+  deleteCampaignButton.id ="deleteCampaignButton"
   deleteCampaignButton.addEventListener('click', ()=>{deleteCampaign(campaignId, showCampaignCardsModal)})
 
   showCampaignCardsClose_button.addEventListener("click", ()=>{
