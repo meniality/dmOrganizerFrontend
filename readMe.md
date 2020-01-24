@@ -6,4 +6,4 @@ HOW THE APP WORKS:
   2. Built in HTML5
   3. Built completely in vanilla JavaScript and has no dependencies
   
-  ![](DMOrganizerGIF.gif)
+  ![]()
