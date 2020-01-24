@@ -28,7 +28,7 @@ function showCardModal(card_id){
   
 
   showCardModalClose_button.className="close-button"
-  showCardModalClose_button.innerText = 'x'
+  showCardModalClose_button.innerHTML = '&times'
   showCardModalClose_button.addEventListener("click", ()=> {
     toggleModal() 
     campaignCardModal.classList.toggle("show-modal")

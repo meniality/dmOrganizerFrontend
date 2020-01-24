@@ -36,7 +36,7 @@ function showCardsInCampaign(campaignId, modal){
   showCampaignCardsdModal_content.className="modal-content"
 
   showCampaignCardsClose_button.className="close-button"
-  showCampaignCardsClose_button.innerText = 'x'
+  showCampaignCardsClose_button.innerHTML = '&times'
 
   modalCardsContainer.id = "modalCardContainer"
   modalCardsContainer.addEventListener('click', () => {
@@ -95,7 +95,7 @@ function createNewCardModal(campaignId){
   createNewCardModal_content.className="new-campaign-modal-content"
 
   createNewCardClose_button.className="close-button"
-  createNewCardClose_button.innerText = 'x'
+  createNewCardClose_button.innerHTML = '&times'
   createNewCardClose_button.addEventListener('click', () =>{
     document.body.querySelector('#campaignCardModal').classList.toggle("show-modal")
   })

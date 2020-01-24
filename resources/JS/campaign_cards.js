@@ -24,7 +24,7 @@ function renderCampaignsModal(){
   modal_campaign_cards.id="modalCampaignCards"
 
   close_button.className="close-button"
-  close_button.innerText = 'x' 
+  close_button.innerHTML = '&times'
 
   modal_content.className="modal-content"
   modal_content.id ="campaignsModalContent"
@@ -77,7 +77,7 @@ function createNewWorldModal(modal_campaign_cards,modal){
   createNewWorldModal_content.className="new-campaign-modal-content"
 
   createNewWorldClose_button.className="close-button"
-  createNewWorldClose_button.innerText = 'x'
+  createNewWorldClose_button.innerHTML = '&times'
   createNewWorldClose_button.addEventListener('click', () =>{modal.classList.toggle("show-modal")})
 
   createNewWorldModal_content.append(createNewWorldClose_button)
