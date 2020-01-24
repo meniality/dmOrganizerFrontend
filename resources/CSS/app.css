@@ -84,3 +84,40 @@
   font-size: 30px;
   margin-bottom: -6px;
 }
+
+#modalCardContainer{
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 20px 20px;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+#cardContainer{
+  width: 220px;
+  height: 340px;
+  background-image: url("../images/blankCardBackground.jpg");
+  border-radius: 8px;
+  background-position: center;
+  background-size: cover;
+}
+
+#cardName{
+  justify-content: center;
+    display: flex;
+    padding-top: 3px;
+    margin-bottom: 4px;
+}
+
+#cardImage{
+  padding-left: 10px;
+  width: 200px;
+  height: 147px;
+}
+
+#shortDescription{
+  padding-left: 12px;
+  padding-top: 5px;
+  width: 195px;
+  height: 90px;
+}
