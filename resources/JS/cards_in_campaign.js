@@ -8,12 +8,27 @@ function testForCampaignCardModal(campaignId, modal){
     showCardsInCampaign(campaignId, modal)
   }
 }
+
+function testForNewCardModal(campaignId){
+  newCardModal = document.querySelector("#createNewCardModal")
+  if (newCardModal) {
+    newCardModalValue = newCardModal.querySelector("#campaign_id")
+
+    newCardModalValue.value = campaignId
+    newCardModal.classList.toggle("show-modal")
+  } 
+  else {
+    createNewCardModal(campaignId)
+  }
+}
+
 function showCardsInCampaign(campaignId, modal){
   const showCampaignCardsModal = document.createElement('div')
   const showCampaignCardsdModal_content = document.createElement('div')
   const modalCardsContainer = document.createElement('div')
   const showCampaignCardsClose_button = document.createElement('span')
   const newCardButton = document.createElement('button')
+  const deleteCampaignButton = document.createElement('button')
   
   showCampaignCardsModal.className="modal"
   showCampaignCardsModal.id="campaignCardModal"
@@ -24,13 +39,20 @@ function showCardsInCampaign(campaignId, modal){
   showCampaignCardsClose_button.innerText = 'x'
 
   modalCardsContainer.id = "modalCardContainer"
+  modalCardsContainer.addEventListener('click', () => {
+    testForShowCardModal(event.path[event.path.length - 8].querySelector("#card_id").value),
+    showCampaignCardsModal.classList.toggle("show-modal")
+  })
 
   newCardButton.innerText = "Create a new card."
   newCardButton.addEventListener('click', () =>{
     showCampaignCardsModal.classList.toggle("show-modal")
-    createNewCardModal(campaignId)
+
+    testForNewCardModal(campaignId)
   })
-  
+  deleteCampaignButton.innerText = "Delete Campaign"
+  deleteCampaignButton.addEventListener('click', ()=>{deleteCampaign(campaignId, showCampaignCardsModal)})
+
   showCampaignCardsClose_button.addEventListener("click", ()=>{
     toggleModal(),
     modal.classList.toggle("show-modal")
@@ -42,7 +64,8 @@ function showCardsInCampaign(campaignId, modal){
   showCampaignCardsdModal_content.append(
     newCardButton, 
     showCampaignCardsClose_button,
-    modalCardsContainer 
+    modalCardsContainer,
+    deleteCampaignButton 
     )
 
   showCampaignCardsModal.append(showCampaignCardsdModal_content)
@@ -51,7 +74,6 @@ function showCardsInCampaign(campaignId, modal){
 
   function toggleModal() {
     showCampaignCardsModal.classList.toggle("show-modal");
-
   }
   
   function windowOnClick(event) {
@@ -75,7 +97,6 @@ function createNewCardModal(campaignId){
   createNewCardClose_button.className="close-button"
   createNewCardClose_button.innerText = 'x'
   createNewCardClose_button.addEventListener('click', () =>{
-    toggleModal,
     document.body.querySelector('#campaignCardModal').classList.toggle("show-modal")
   })
 
@@ -133,13 +154,16 @@ function createNewCardForm(campaignId, createNewCardModal_content){
   createNewCardFormCampaingId.type = 'hidden'
   createNewCardFormCampaingId.value = campaignId
   createNewCardFormCampaingId.name ='campaign_id'
+  createNewCardFormCampaingId.id ='campaign_id'
 
   createNewCardFormSubmit.innerText = "submit"
   createNewCardFormSubmit.addEventListener('click', event => {
+    createNewCardModal = 
     event.preventDefault(),
     createNewCardFetch(createNewCardForm)
     document.body.querySelector("#campaignCardModal").classList.toggle("show-modal");
     document.body.querySelector("#createNewCardModal").classList.toggle("show-modal");
+    createNewCardForm.reset()
   })
 
   createNewCardForm.append(
@@ -194,17 +218,17 @@ function createCardsInCampaign(modalCardsContainer, campaign_id){
 function createCardInCampaign(card){
   const modalCardsContainer=document.querySelector("#modalCardContainer")
   const cardContainer = document.createElement('div')
-  const valueOfCardForm = document.createElement ('form')
   const valueOfCardValue = document.createElement ('input')
   const name = document.createElement('p')
   const image = document.createElement('img')
   const short_description = document.createElement('p')
 
 
-  cardContainer.id = "cardContainer"
+  cardContainer.className = "cardContainer"
+  cardContainer.id = `cardId${card.id}`
 
   valueOfCardValue.type = "hidden"
-  valueOfCardValue.name = "card_id"
+  valueOfCardValue.id = "card_id"
   valueOfCardValue.value = card.id
   
   cardContainer.append(valueOfCardValue)
@@ -213,7 +237,11 @@ function createCardInCampaign(card){
   name.id = "cardName"
 
   image.id = "cardImage"
-  image.src = card.image
+  if (card.image){
+    image.src = card.image
+  } else {
+    image.src = "./resources/images/defaultCardImage.jpg"
+  }
 
   short_description.innerText = card.short_description
   short_description.id = "shortDescription"
@@ -221,4 +249,27 @@ function createCardInCampaign(card){
   cardContainer.append(name, image, short_description)
 
   modalCardsContainer.appendChild(cardContainer)
+}
+
+function deleteCampaign(campaignId, showCampaignCardsModal){
+  fetch(`http://localhost:3000/campaigns/${campaignId}`,{
+    method: 'DELETE',
+    headers: {
+      authorization: `bearer ${localStorage.getItem('token')}`
+    }
+  })
+  .then(() => {
+    removeCampaignFromMainPage(campaignId)
+  })
+  .then(() => {
+    showCampaignCardsModal.classList.toggle("show-modal")
+
+    allCampaigns = document.querySelector('#campaignsModal')
+    allCampaigns.classList.toggle("show-modal")
+  })
+}
+
+function removeCampaignFromMainPage(campaignId){
+  campaignContainer= document.querySelector(`#campaignId${campaignId}`)
+  campaignContainer.remove()
 }

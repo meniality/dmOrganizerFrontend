@@ -46,7 +46,6 @@ function renderCampaignsModal(){
 
   createCampaignCards(modal_campaign_cards, modal)
 
-  // modal_content.appendChild(modal_campaign_cards)
   modal.append(modal_content)
   document.body.append(modal)
 
@@ -158,10 +157,9 @@ function createCampaignCards(modal_campaign_cards, modal){
     }
   })
   .then(response => response.json())
-  .then(campaigns => {
-      campaigns.map(campaign => {
+  .then(campaigns => {for(let campaign of campaigns){
       createCampaignCard(campaign,modal_campaign_cards, modal)
-    })
+    }
   })  
 }
 
@@ -181,7 +179,8 @@ function createCampaignCard(campaign, modal_campaign_cards, modal){
     modal.classList.toggle("show-modal"),
     testForCampaignCardModal(formInput.value, modal)
   })
-  campaignCard.id = "campaignCard"
+  campaignCard.className = "campaignCard"
+  campaignCard.id = `campaignId${campaign.id}`
   title.innerText = campaign.name
   title.id="campaignTitle"
 

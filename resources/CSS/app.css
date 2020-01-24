@@ -1,3 +1,18 @@
+body{
+  background-image: URL(https://bhf-cdn.azureedge.net/bhf-blob-prod/0008985_willow-ale-faux-parchment-texture_600.jpeg);
+  background-image: URL(../images/splashPAgeOverlay.png);
+  background-size: cover;
+}
+
+input{
+margin-bottom: 3px;
+}
+
+h1{
+  display: flex; 
+  justify-content: center;
+}
+
 #topOfPage{
   display: flex;
   justify-content: space-between;
@@ -13,7 +28,7 @@
   opacity: 0;
   visibility: hidden;
   transform: scale(1.1);
-  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+  transition: visibility .25s all ease .25s, opacity 0.25s 0s, transform 0.25s;
 }
 
 .modal-content {
@@ -65,13 +80,18 @@
   opacity: 1;
   visibility: visible;
   transform: scale(1.0);
-  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+  transition: visibility .25s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
 
-#campaignCard{
+.campaignCard{
   width: 15rem;
   background-color:rgb(238, 238, 238);
   border-radius: 8px;
+}
+
+.campaignCard:hover{
+  transform: scale(1.1);
+  box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2);
 }
 
 #campaignImage{
@@ -80,9 +100,9 @@
 
 #campaignTitle{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   font-size: 30px;
-  margin-bottom: -6px;
+  margin: 20px;
 }
 
 #modalCardContainer{
@@ -93,7 +113,7 @@
   justify-content: center;
 }
 
-#cardContainer{
+.cardContainer{
   width: 220px;
   height: 340px;
   background-image: url("../images/blankCardBackground.jpg");
@@ -102,11 +122,16 @@
   background-size: cover;
 }
 
+.cardContainer:hover{
+  transform: scale(1.1);
+  box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2);
+}
+
 #cardName{
   justify-content: center;
-    display: flex;
-    padding-top: 3px;
-    margin-bottom: 4px;
+  display: flex;
+  padding-top: 3px;
+  margin-bottom: 4px;
 }
 
 #cardImage{
@@ -121,3 +146,167 @@
   width: 195px;
   height: 90px;
 }
+
+#card-modal-content{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 1rem 1.5rem;
+  width: 40rem;
+  height: 40rem;
+  border-radius: 0.5rem;
+  overflow-x: hidden; 
+  overflow-x: auto; 
+}
+
+#parentCardDiv{
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  grid-gap: 10px 10px;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+#childCardDiv{
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  grid-gap: 10px 10px;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+.relationshipCardCard{
+  width: 140px;
+  height: 200px;
+  background-image: url("../images/blankCardBackground.jpg");
+  border-radius: 8px;
+  background-position: center;
+  background-size: cover;
+}
+
+.relationshipCardCard:hover{
+  transform: scale(1.05);
+  box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2);
+}
+
+.relationshipCardImage{
+  padding-left: 11px;
+  width: 117px;
+  height: 86px;
+  margin-top: 24px;
+}
+
+.relationshipCardName{
+  display: flex;
+  justify-content: center;
+  margin-top: 26px;
+}
+
+#showCardName{
+  background-color: #b9b5b5;
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  border-style: solid;
+  border-radius: 9px;
+  border-color: #b9b5b5;
+}
+
+#showCardDescription{
+  display: flex;
+  justify-content: center;
+  font-size: 1.3rem;
+  text-decoration: underline;
+}
+
+#showCardText{
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+}
+
+#showCardImage{
+  width: 100%;
+}
+
+#updateCardForm{
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+#updateTile{
+  display: flex;
+margin-top: 2rem;
+height: 37px;
+font-size: 2rem;
+text-align: center;
+font-weight: bold;
+font-family: serif;
+position: relative;
+left: 10px;
+}
+
+#updateShortDescription{
+  display: flex;
+  justify-content: center;
+  font-size: 1.3rem;
+  text-align: center;
+  font-family: serif;
+  position: relative;
+  left: 10px;
+  margin-top: 1.8rem;
+}
+
+#updateText{
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+  text-align: center;
+  position: relative;
+  font-family: serif;
+  font-size: 1rem;
+  left: 10px;
+  height: 230px;
+  width: 612px;
+}
+
+#updateImage{
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  text-align: center;
+  position: relative;
+  font-family: serif;
+  font-size: 1rem;
+  left: 10px;
+}
+
+#updateSubmitButton{
+  display: flex;
+  justify-content: center;
+  position: relative;
+  font-family: serif;
+  font-size: 1rem;
+  left: 10px;
+  margin-top: 2rem;
+}
+
+#removeButton{
+  border-radius: 6px;
+  bottom: 7px;
+  background-color: RGBA(0,0,0,.1);
+  left: 32px;
+  position: relative;
+  font-size: 1.1rem;
+  border-style: none;
+}
+
+#removeButton:hover{
+  transform: scale(1.1);
+  box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2)
+}
+
+ 

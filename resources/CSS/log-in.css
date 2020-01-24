@@ -3,8 +3,10 @@
 }
 
 #topOfPage{
-  
   padding: 1rem;
+  background-color: RGBA(138, 99, 11, 0.5);
+  margin: -10px;
+  height: 125px;
 }
 
 #loginForm{
@@ -14,9 +16,22 @@
   align-items: center;
 }
 
+#welcomeMessage{
+  font-size: 1.5rem;
+}
+
+#signoutButton{
+  position: relative;
+  left: 22px;
+  width: 85px;
+  height: 40px;
+  border-radius: 4px;
+}
+
 #createNewUserButton{
   position: relative;
   left: 30px;
+  margin-top: 2px;
 }
 
 #newUserForm{
@@ -28,5 +43,31 @@
 
 #cancelCreateNewUserButton{
   position: relative;
-  left: 45px;
+  left: 40px;
+}
+
+#navBar{
+  background-color: #4e400c;
+  width: 200px;
+  border-radius: 5px;
+}
+
+#worldBuilderButton{
+  font-family: serif;
+  width: 196px;
+  height: 121px;
+  border-radius: 5px;
+  position: relative;
+  left: 2px;
+  top: 1px;
+  font-size: 1.3rem;
+
+}
+
+#campaignButtonImage{
+  width: 135px;
+  height: 94px;
+  margin-top: -6px;
+  margin-bottom: -13px;
+
 }
