@@ -163,6 +163,7 @@ function createNewCardForm(campaignId, createNewCardModal_content){
     createNewCardFetch(createNewCardForm)
     document.body.querySelector("#campaignCardModal").classList.toggle("show-modal");
     document.body.querySelector("#createNewCardModal").classList.toggle("show-modal");
+    createNewCardForm.reset()
   })
 
   createNewCardForm.append(

@@ -1,5 +1,4 @@
 function testForShowCardModal(card_id){
-  console.log(card_id)
   showcard = document.querySelector('#showCardModal')
   if (showcard){
     showcard.remove()
@@ -24,6 +23,7 @@ function showCardModal(card_id){
 
   cardEditButton.innerText="Edit"
   cardEditButton.id="cardEditButton"
+  cardEditButton.value=card_id
   cardEditButton.addEventListener('click', () => editCard(showCardModal_content, showCardModal))
   
 
@@ -67,6 +67,7 @@ function getCardInfoFetch(showCardModal_content, card_id, showCardModal){
 }
 
 function createShowCard(showCardModal_content, card, showCardModal){
+  const showCardInfoDiv = document.createElement('div')
   const name = document.createElement('h3')
   const shortDescription = document.createElement('p')
   const text = document.createElement('p')
@@ -81,6 +82,8 @@ function createShowCard(showCardModal_content, card, showCardModal){
   const image = document.createElement('img')
   const deleteButton = document.createElement('button')
 
+  showCardInfoDiv.id ="showCardInfoDiv"
+
   name.innerText = card.name
   name.id ="showCardName"
   shortDescription.innerText = card.short_description
@@ -89,6 +92,13 @@ function createShowCard(showCardModal_content, card, showCardModal){
   text.id = "showCardText"
   image.src = card.image
   image.id = "showCardImage"
+
+  showCardInfoDiv.append(
+    name,
+    shortDescription,
+    text,
+    image)
+
   addRelationshipLabel.innerText = "Add a Card Relationship:"
 
   cardDropdownMenu.type ="search"
@@ -105,25 +115,35 @@ function createShowCard(showCardModal_content, card, showCardModal){
   parentCardsLabel.innerText = "Parent Cards"
   parentCardDiv.id = "parentCardDiv"
   populateParentCardDiv(card, parentCardDiv)
-  parentCardDiv.addEventListener('click', () => {
+  parentCardDiv.addEventListener('click', (event) => {
+    if(event.path[0].id === "removeButton"){
+      removeCardRelationship(card.id, event.target.value)
+      event.target.parentNode.remove()
+    }
+    else {
     testForShowCardModal(event.path[event.path.length-8].querySelector('#relationshipCardId').value)
+    }
   })
 
   childCardLabel.innerText = "Child Cards"
   childCardDiv.id = "childCardDiv"
   populateChildCardDiv(card, childCardDiv)
-  childCardDiv.addEventListener('click', () => {
+  childCardDiv.addEventListener('click', (event) => {
+    if(event.path[0].id === "removeButton"){
+      removeCardRelationship(event.target.value, card.id)
+      event.target.parentNode.remove()
+    }
+    else {
     testForShowCardModal(event.path[event.path.length-8].querySelector('#relationshipCardId').value)
+    }
   })
   
   deleteButton.innerText = "Delete"
   deleteButton.value = card.id
   deleteButton.addEventListener('click', () => {deleteCard(event.target.value, showCardModal)})
 
-  showCardModal_content.append(name, 
-    shortDescription, 
-    text, 
-    image, 
+  showCardModal_content.append(
+    showCardInfoDiv, 
     addRelationshipLabel,
     cardDropdownMenu,
     addParentButton,
@@ -223,6 +243,7 @@ function createParentCard(parentCard, parentCardDiv){
     const name = document.createElement('p')
     const image = document.createElement('img')
     const cardId = document.createElement('input')
+    const removeButton = document.createElement('button')
 
     cardId.type="hidden"
     cardId.value = parentCard.id
@@ -233,6 +254,10 @@ function createParentCard(parentCard, parentCardDiv){
     name.innerText = parentCard.name
     name.className = "relationshipCardName"
 
+    removeButton.innerText = "remove"
+    removeButton.id="removeButton"
+    removeButton.value = `${parentCard.id}`
+
     image.className = "relationshipCardImage"
     if (parentCard.image){
       image.src = parentCard.image
@@ -241,7 +266,7 @@ function createParentCard(parentCard, parentCardDiv){
       image.src = "./resources/images/defaultCardImage.jpg"
     }
 
-    relationshipCardDiv.append(image, name, cardId)
+    relationshipCardDiv.append(image, name, cardId, removeButton)
     parentCardDiv.append(relationshipCardDiv)
 }
 
@@ -270,11 +295,13 @@ function populateChildCardDiv(card, childCardDiv){
 }
 
 function createChildCard(childCard, childCardDiv){
+  
     const relationshipCardDiv = document.createElement('div')
     const name = document.createElement('p')
     const image = document.createElement('img')
     const cardId = document.createElement('input')
-
+    const removeButton = document.createElement('button')
+  
     cardId.type="hidden"
     cardId.value = childCard.id
     cardId.id = "relationshipCardId"
@@ -292,11 +319,16 @@ function createChildCard(childCard, childCardDiv){
       image.src = "./resources/images/defaultCardImage.jpg"
     }
 
-    relationshipCardDiv.append(image, name, cardId)
+    removeButton.innerText = "remove"
+    removeButton.id="removeButton"
+    removeButton.value = `${childCard.id}`
+
+    relationshipCardDiv.append(image, name, cardId, removeButton)
     childCardDiv.append(relationshipCardDiv)
 }
 
 function editCard(showCardModal_content, showCardModal){
+  showCardInfoDiv = document.querySelector('#showCardInfoDiv')
   title = document.querySelector('#showCardName')
   shortDescription = document.querySelector('#showCardDescription')
   text = document.querySelector('#showCardText')
@@ -329,16 +361,56 @@ function editCard(showCardModal_content, showCardModal){
     event.preventDefault()
     formData = new FormData(updateCardForm)
     updateCardFetch(formData)
+
+    title.innerText = updateTitle.value
+    shortDescription.innerText = updateShortDescription.value
+    text.innerText = updateText.value
+    if (updateImage.innerText = "http://localhost:3001/"){  
+      } 
+    else {
+      image.src=updateImage.value
+      }
+    
+      updateCardForm.parentNode.replaceChild(showCardInfoDiv, updateCardForm)
+
   })
 
   updateCardForm.append(updateTitle, updateShortDescription, updateText, updateImage, updateSubmitButton)
 
-  title.parentNode.replaceChild(updateCardForm, title)
-  shortDescription.remove()
-  text.remove()
-  image.remove()
+  showCardInfoDiv.parentNode.replaceChild(updateCardForm, showCardInfoDiv)
+  
 }
 
 function updateCardFetch(formData){
-console.log(formData.get("name"))
+  const id = document.querySelector("#cardEditButton").value
+  const name = formData.get("name")
+  const short_description = formData.get("short_description")
+  const text = formData.get("text")
+  let image = formData.get("image")
+
+  if (image === "http://localhost:3001/"){image = ""}
+  
+  fetch('http://localhost:3000/update_card',{
+  method: "PATCH",
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  authorization: `bearer ${localStorage.getItem('token')}`
+  },
+  body: JSON.stringify({card: {id, name, short_description, text, image}})
+  })
+  .then(response => response.json())
+}
+
+function removeCardRelationship(child_card_id, parent_card_id){
+  
+  fetch('http://localhost:3000/destroy_relationship', {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    authorization: `bearer ${localStorage.getItem('token')}`,
+    },
+    body: JSON.stringify({"card_relationships":{child_card_id, parent_card_id}})
+  })
 }
